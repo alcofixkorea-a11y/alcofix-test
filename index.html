@@ -7,549 +7,568 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+KR:wght@400;500;700;900&display=swap">
 <script src="https://cdn.tailwindcss.com/3.4.16"></script>
 <script>
 tailwind.config = {
     theme: {
         extend: {
             colors: {
-                navy: { DEFAULT: '#0A1F44', 900: '#061530', 700: '#14305F', 500: '#2B4A7E', 100: '#E6ECF5' },
-                point: { DEFAULT: '#FF3838', dark: '#E02A2A' },
-                soft: '#F8FAFC',
-                line: '#E2E8F0'
+                navy: { DEFAULT: '#0A192F', 950: '#050E1C', 800: '#112442', 700: '#1B3358', 100: '#E7EDF5' },
+                cyan: { DEFAULT: '#0284C7', light: '#38BDF8', soft: '#E0F2FE' },
+                teal: { DEFAULT: '#0D9488', light: '#2DD4BF' },
+                coral: { DEFAULT: '#FF4D4D', dark: '#E63B3B' },
+                slate: { 50: '#F8FAFC', 200: '#E2E8F0', 400: '#94A3B8', 500: '#64748B', 600: '#475569' }
             },
-            fontFamily: {
-                sans: ['Geist', 'Noto Sans KR', 'system-ui', 'sans-serif']
-            },
-            maxWidth: { wide: '1840px' }
+            fontFamily: { sans: ['Inter', 'Noto Sans KR', 'system-ui', 'sans-serif'] }
         }
     }
 };
 </script>
 <style>
-    html{scroll-behavior:smooth;scroll-padding-top:84px}
-    body{background:#FFFFFF;color:#0A1F44;word-break:keep-all;-webkit-font-smoothing:antialiased}
+    html{scroll-behavior:smooth;scroll-padding-top:88px}
+    body{background:#FFFFFF;color:#0A192F;word-break:keep-all;-webkit-font-smoothing:antialiased}
     .wrap{width:100%;max-width:1840px;margin:0 auto;padding-left:16px;padding-right:16px}
     @media(min-width:640px){.wrap{padding-left:24px;padding-right:24px}}
     @media(min-width:1024px){.wrap{padding-left:32px;padding-right:32px}}
-    .grid-bg{background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:48px 48px}
-    .grid-bg-light{background-image:linear-gradient(rgba(10,31,68,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(10,31,68,.05) 1px,transparent 1px);background-size:48px 48px}
+    .grid-dark{background-image:linear-gradient(rgba(148,163,184,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(148,163,184,.07) 1px,transparent 1px);background-size:56px 56px}
+    .grid-light{background-image:linear-gradient(rgba(10,25,47,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(10,25,47,.045) 1px,transparent 1px);background-size:56px 56px}
     .eyebrow{font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase}
-    .tilt{transform:perspective(1400px) rotateY(-14deg) rotateX(6deg);transition:transform .8s cubic-bezier(.2,.7,.2,1)}
-    .tilt:hover{transform:perspective(1400px) rotateY(-4deg) rotateX(2deg)}
+    .outline-word{color:transparent;-webkit-text-stroke:1.5px currentColor}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+    @keyframes pulseRing{0%{transform:scale(.8);opacity:.7}100%{transform:scale(2.2);opacity:0}}
+    @keyframes dash{to{stroke-dashoffset:-40}}
+    .float{animation:float 6s ease-in-out infinite}
+    .float-slow{animation:float 9s ease-in-out infinite}
+    .pulse-ring{animation:pulseRing 2.6s ease-out infinite}
+    .bond{stroke-dasharray:6 8;animation:dash 3s linear infinite}
     .js .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
     .js .reveal.in{opacity:1;transform:none}
-    @media(prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none;transition:none}.tilt{transform:none}html{scroll-behavior:auto}}
-    .lang-btn[aria-pressed="true"]{color:#0A1F44;font-weight:700}
-    .field{width:100%;border:1px solid #E2E8F0;background:#fff;padding:13px 14px;font-size:15px;color:#0A1F44;outline:none;transition:border-color .2s,box-shadow .2s}
-    .field:focus{border-color:#0A1F44;box-shadow:0 0 0 3px rgba(10,31,68,.08)}
-    a:focus-visible,button:focus-visible{outline:2px solid #FF3838;outline-offset:3px}
+    @media(prefers-reduced-motion:reduce){
+        .js .reveal{opacity:1;transform:none;transition:none}
+        .float,.float-slow,.pulse-ring,.bond{animation:none}
+        html{scroll-behavior:auto}
+    }
+    .lang-btn[aria-pressed="true"]{color:#0A192F;font-weight:700}
+    .field{width:100%;border:1px solid #E2E8F0;background:#fff;padding:13px 14px;font-size:15px;color:#0A192F;outline:none;transition:border-color .2s,box-shadow .2s}
+    .field:focus{border-color:#0284C7;box-shadow:0 0 0 3px rgba(2,132,199,.12)}
+    a:focus-visible,button:focus-visible,select:focus-visible{outline:2px solid #0284C7;outline-offset:3px}
 </style>
 
 <!-- Test-server notice -->
-<div class="bg-navy-900 text-white/80 text-[12px]">
+<div class="bg-navy-950 text-white/75 text-[12px]">
     <div class="wrap flex items-center justify-center gap-2 py-1.5">
-        <span class="inline-block w-1.5 h-1.5 rounded-full bg-point"></span>
-        <span data-en="TEST SERVER · Renewal draft, not applied to alcofix.co.kr">TEST SERVER · 리뉴얼 시안 (alcofix.co.kr에는 적용되지 않음)</span>
+        <span class="inline-block w-1.5 h-1.5 rounded-full bg-coral"></span>
+        <span data-en="TEST SERVER · Corporate IR portal draft, not applied to alcofix.co.kr">TEST SERVER · 기업 IR 포털 리뉴얼 시안 (alcofix.co.kr에는 적용되지 않음)</span>
     </div>
 </div>
 
-<!-- ===== Header ===== -->
-<header id="top" class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-line transition-shadow">
-    <div class="wrap flex items-center justify-between h-[72px] gap-6">
-        <a href="#solution" class="shrink-0" aria-label="ALCOFIX 홈">
+<!-- ===== GNB ===== -->
+<header id="top" class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200 transition-shadow">
+    <div class="wrap flex items-center justify-between h-[76px] gap-6">
+        <a href="#hero" class="shrink-0 flex items-center gap-3" aria-label="ALCOFIX 홈">
             <img src="images/logo.png" alt="ALCOFIX" class="h-9 sm:h-10 w-auto">
+            <span class="hidden 2xl:block pl-3 border-l border-slate-200 text-[11px] font-semibold tracking-[.2em] text-slate-500">ALCOHOL TOTAL SOLUTION</span>
         </a>
-        <nav class="hidden lg:flex items-center gap-8 xl:gap-12 text-[15px] font-medium text-navy/70" aria-label="주요 메뉴">
-            <a href="#solution" class="hover:text-navy transition-colors" data-en="Solution">솔루션 소개</a>
-            <a href="#rnd" class="hover:text-navy transition-colors" data-en="R&amp;D">핵심 R&amp;D</a>
-            <a href="#lineup" class="hover:text-navy transition-colors" data-en="Line-up">제품 라인업</a>
-            <a href="#global" class="hover:text-navy transition-colors" data-en="Global">글로벌 실적</a>
-            <a href="#contact" class="hover:text-navy transition-colors" data-en="Contact">문의하기</a>
+        <nav class="hidden xl:flex items-center gap-8 2xl:gap-11 text-[14.5px] font-medium text-slate-600" aria-label="주요 메뉴">
+            <a href="#vision" class="hover:text-navy transition-colors">Corporate Vision</a>
+            <a href="#rnd" class="hover:text-navy transition-colors">R&amp;D Leadership</a>
+            <a href="#pipeline" class="hover:text-navy transition-colors">Pipeline Roadmap</a>
+            <a href="#global" class="hover:text-navy transition-colors">Global Footprint</a>
+            <a href="#contact" class="hover:text-navy transition-colors">Contact</a>
         </nav>
-        <div class="flex items-center gap-3 sm:gap-5">
-            <div class="flex items-center gap-2 text-[13px] text-navy/40" role="group" aria-label="언어 선택">
+        <div class="flex items-center gap-3 sm:gap-4">
+            <div class="flex items-center gap-2 text-[13px] text-slate-400" role="group" aria-label="언어 선택">
                 <button type="button" class="lang-btn" data-lang="ko" aria-pressed="true">KR</button>
                 <span aria-hidden="true">|</span>
                 <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
             </div>
-            <a href="https://smartstore.naver.com/alcofixkorea/products/12747856417" target="_blank" rel="noopener"
-               class="hidden sm:inline-flex items-center gap-2 bg-point hover:bg-point-dark text-white text-[14px] font-semibold px-4 py-2.5 transition-colors">
-                <i data-lucide="shopping-bag" class="w-4 h-4"></i><span data-en="Buy Hwakkaeyu">확깨유 구매하기</span>
+            <a href="https://smartstore.naver.com/alcofixkorea" target="_blank" rel="noopener"
+               class="hidden md:inline-flex items-center gap-1.5 border border-coral text-coral hover:bg-coral hover:text-white text-[14px] font-semibold px-4 py-2.5 transition-colors">
+                <span data-en="Hwakkaeyu Brand Store">확깨유 브랜드몰</span><i data-lucide="arrow-up-right" class="w-4 h-4"></i>
             </a>
-            <button type="button" id="menuBtn" class="lg:hidden p-2 -mr-2" aria-label="메뉴 열기" aria-expanded="false">
+            <a href="#contact" class="hidden sm:inline-flex items-center gap-1.5 bg-navy hover:bg-navy-700 text-white text-[14px] font-semibold px-4 py-2.5 transition-colors">
+                <span data-en="B2B Inquiry">B2B 문의하기</span>
+            </a>
+            <button type="button" id="menuBtn" class="xl:hidden p-2 -mr-2" aria-label="메뉴 열기" aria-expanded="false">
                 <i data-lucide="menu" class="w-6 h-6"></i>
             </button>
         </div>
     </div>
-    <nav id="mobileNav" class="lg:hidden hidden border-t border-line bg-white" aria-label="모바일 메뉴">
+    <nav id="mobileNav" class="xl:hidden hidden border-t border-slate-200 bg-white" aria-label="모바일 메뉴">
         <div class="wrap flex flex-col py-2 text-[16px] font-medium">
-            <a href="#solution" class="py-3 border-b border-line" data-en="Solution">솔루션 소개</a>
-            <a href="#rnd" class="py-3 border-b border-line" data-en="R&amp;D">핵심 R&amp;D</a>
-            <a href="#lineup" class="py-3 border-b border-line" data-en="Line-up">제품 라인업</a>
-            <a href="#global" class="py-3 border-b border-line" data-en="Global">글로벌 실적</a>
-            <a href="#contact" class="py-3" data-en="Contact">문의하기</a>
-            <a href="https://smartstore.naver.com/alcofixkorea/products/12747856417" target="_blank" rel="noopener"
-               class="my-3 inline-flex justify-center items-center gap-2 bg-point text-white font-semibold py-3">
-                <i data-lucide="shopping-bag" class="w-4 h-4"></i><span data-en="Buy Hwakkaeyu">확깨유 구매하기</span>
-            </a>
+            <a href="#vision" class="py-3 border-b border-slate-200">Corporate Vision</a>
+            <a href="#rnd" class="py-3 border-b border-slate-200">R&amp;D Leadership</a>
+            <a href="#pipeline" class="py-3 border-b border-slate-200">Pipeline Roadmap</a>
+            <a href="#global" class="py-3 border-b border-slate-200">Global Footprint</a>
+            <a href="#contact" class="py-3">Contact</a>
+            <div class="my-3 grid grid-cols-2 gap-2">
+                <a href="https://smartstore.naver.com/alcofixkorea" target="_blank" rel="noopener" class="inline-flex justify-center items-center gap-1.5 border border-coral text-coral font-semibold py-3">
+                    <span data-en="Brand Store">확깨유 브랜드몰</span><i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                </a>
+                <a href="#contact" class="inline-flex justify-center items-center bg-navy text-white font-semibold py-3"><span data-en="B2B Inquiry">B2B 문의하기</span></a>
+            </div>
         </div>
     </nav>
 </header>
 
 <main>
-<!-- ===== Section 1: Hero ===== -->
-<section id="solution" class="relative overflow-hidden bg-navy text-white">
-    <div class="absolute inset-0 grid-bg" aria-hidden="true"></div>
-    <div class="absolute -right-40 -top-40 w-[640px] h-[640px] rounded-full bg-navy-500/40 blur-3xl" aria-hidden="true"></div>
-    <div class="wrap relative grid lg:grid-cols-12 gap-10 lg:gap-8 items-center py-16 sm:py-20 lg:py-28">
+<!-- ===== Hero ===== -->
+<section id="hero" class="relative overflow-hidden bg-navy text-white">
+    <div class="absolute inset-0 grid-dark" aria-hidden="true"></div>
+    <div class="absolute -left-40 bottom-0 w-[560px] h-[560px] rounded-full bg-cyan/20 blur-3xl" aria-hidden="true"></div>
+    <div class="absolute right-0 -top-32 w-[620px] h-[620px] rounded-full bg-teal/15 blur-3xl" aria-hidden="true"></div>
+
+    <div class="wrap relative grid lg:grid-cols-12 gap-12 lg:gap-8 items-center py-16 sm:py-20 lg:py-28">
         <div class="lg:col-span-7 reveal">
-            <p class="eyebrow text-white/60 flex items-center gap-3">
-                <span class="w-8 h-px bg-point"></span>ALCOHOL TOTAL SOLUTION
+            <p class="eyebrow text-cyan-light flex items-center gap-3">
+                <span class="w-8 h-px bg-cyan-light"></span>ALCOFIX CO., LTD. · ALCOHOL TOTAL SOLUTION
             </p>
-            <h1 class="mt-6 text-[40px] leading-[1.15] sm:text-6xl xl:text-7xl font-black tracking-tight"
-                data-en="Science-led care<br>for every moment<br>around drinking.">음주 전후의 모든 순간을<br><span class="text-point">과학</span>으로 케어합니다</h1>
-            <p class="mt-7 max-w-2xl text-[17px] sm:text-xl leading-relaxed text-white/75"
-               data-en="ALCOFIX, the alcohol total solution. Proprietary formulations built by a pharmaceutical R&amp;D researcher deliver recovery beyond the hangover.">
-                알코올 토탈 솔루션 ALCOFIX — 제약사 R&amp;D 출신의 독자적 배합 기술로<br class="hidden md:block"> 숙취 그 이상의 회복을 선사합니다.</p>
+            <h1 class="mt-6 text-[38px] leading-[1.18] sm:text-6xl xl:text-[76px] xl:leading-[1.08] font-black tracking-tight"
+                data-en="Redefining healthy drinking culture with science —<br><span class=&quot;text-cyan-light&quot;>Alcohol Total Solution</span> ALCOFIX">
+                과학으로 재정의하는<br>건강한 음주 문화,<br><span class="text-cyan-light">알코올 토탈 솔루션</span> ALCOFIX</h1>
+            <p class="mt-7 text-xl sm:text-2xl font-semibold italic text-white/90">We fix what alcohol leaves behind.</p>
+            <p class="mt-3 max-w-2xl text-[17px] sm:text-lg leading-relaxed text-white/65"
+               data-en="With proprietary bio-formulation technology and full-cycle R&amp;D capability, we are setting a new standard for global healthcare beyond Asia.">
+                독자적인 바이오 배합 기술과 전 주기 R&amp;D 역량으로 아시아를 넘어 글로벌 헬스케어의 새로운 표준을 세웁니다.</p>
             <div class="mt-10 flex flex-col sm:flex-row gap-3">
-                <a href="https://smartstore.naver.com/alcofixkorea/products/12747856417" target="_blank" rel="noopener"
-                   class="group inline-flex items-center justify-center gap-3 bg-point hover:bg-point-dark text-white font-semibold text-[16px] px-7 py-4 transition-all hover:-translate-y-0.5 shadow-lg shadow-point/30">
-                    <i data-lucide="shopping-bag" class="w-5 h-5"></i>
-                    <span data-en="Buy Hwakkaeyu (Naver Store)">확깨유 구매하기 (네이버 스토어)</span>
-                    <i data-lucide="arrow-up-right" class="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"></i>
-                </a>
-                <a href="#contact"
-                   class="group inline-flex items-center justify-center gap-3 border border-white/40 hover:border-white hover:bg-white hover:text-navy text-white font-semibold text-[16px] px-7 py-4 transition-all">
+                <a href="#contact" class="group inline-flex items-center justify-center gap-3 bg-coral hover:bg-coral-dark text-white font-semibold text-[16px] px-7 py-4 transition-all hover:-translate-y-0.5 shadow-lg shadow-coral/25">
                     <i data-lucide="handshake" class="w-5 h-5"></i>
-                    <span data-en="Export &amp; B2B Partnership">수출 및 B2B 제휴 문의</span>
+                    <span data-en="B2B Partnership &amp; Export Inquiry">B2B 제휴 및 수출 문의</span>
                     <i data-lucide="arrow-down" class="w-4 h-4 transition-transform group-hover:translate-y-0.5"></i>
                 </a>
+                <a href="#rnd" class="group inline-flex items-center justify-center gap-3 border border-white/35 hover:border-white hover:bg-white hover:text-navy text-white font-semibold text-[16px] px-7 py-4 transition-all">
+                    <i data-lucide="microscope" class="w-5 h-5"></i>
+                    <span data-en="Explore our R&amp;D">R&amp;D 핵심 역량 보기</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-0.5"></i>
+                </a>
             </div>
         </div>
 
-        <!-- Product mockup card -->
+        <!-- Molecular research card -->
         <div class="lg:col-span-5 reveal">
-            <div class="tilt relative mx-auto max-w-[520px] bg-gradient-to-br from-white to-navy-100 text-navy shadow-2xl shadow-black/40">
-                <div class="flex items-center justify-between px-6 pt-5 text-[12px] font-semibold tracking-[.18em] text-navy/50">
-                    <span>FIRST PRODUCT</span><span>ALCOFIX LAB</span>
+            <div class="relative mx-auto max-w-[560px] border border-white/15 bg-white/[.04] backdrop-blur-sm shadow-2xl shadow-black/40">
+                <div class="flex items-center justify-between px-5 py-3 border-b border-white/10 text-[11px] font-semibold tracking-[.18em] text-white/50">
+                    <span class="flex items-center gap-2"><span class="relative flex w-2 h-2"><span class="pulse-ring absolute inset-0 rounded-full bg-teal-light"></span><span class="relative w-2 h-2 rounded-full bg-teal-light"></span></span>ALCOFIX R&amp;D LAB</span>
+                    <span>MOLECULAR VIEW</span>
                 </div>
-                <div class="relative aspect-[4/3] flex items-center justify-center">
-                    <div class="absolute w-[58%] aspect-square rounded-full border border-navy/10" aria-hidden="true"></div>
-                    <div class="absolute w-[80%] aspect-square rounded-full border border-dashed border-navy/10" aria-hidden="true"></div>
-                    <img src="images/product-cutout.png" alt="확깨유 패키지" class="relative h-[78%] w-auto drop-shadow-[0_28px_30px_rgba(10,31,68,.35)]">
-                </div>
-                <div class="px-6 pb-6">
-                    <p class="text-2xl font-black tracking-tight" data-en="Hwakkaeyu">확깨유</p>
-                    <p class="mt-1 text-[14px] text-navy/60" data-en="17 herbal ingredients · 3mm micro pill">17종 한방원료 · 3mm 마이크로 환</p>
-                    <div class="mt-5 grid grid-cols-2 gap-2">
-                        <span class="flex items-center gap-2 bg-navy text-white text-[13px] font-medium px-3 py-2.5">
-                            <i data-lucide="leaf" class="w-4 h-4 text-emerald-300 shrink-0"></i><span data-en="100% natural base">100% 천연 원료 기반</span>
-                        </span>
-                        <span class="flex items-center gap-2 bg-navy text-white text-[13px] font-medium px-3 py-2.5">
-                            <i data-lucide="shield-check" class="w-4 h-4 text-sky-300 shrink-0"></i><span data-en="HACCP·GMP facility">HACCP·GMP 인증 제조</span>
-                        </span>
+                <div class="relative aspect-[5/4]">
+                    <svg viewBox="0 0 500 400" class="absolute inset-0 w-full h-full" aria-hidden="true">
+                        <defs>
+                            <radialGradient id="nodeC" cx="35%" cy="35%" r="70%"><stop offset="0" stop-color="#7DD3FC"/><stop offset="1" stop-color="#0284C7"/></radialGradient>
+                            <radialGradient id="nodeO" cx="35%" cy="35%" r="70%"><stop offset="0" stop-color="#FF9A9A"/><stop offset="1" stop-color="#FF4D4D"/></radialGradient>
+                            <radialGradient id="nodeT" cx="35%" cy="35%" r="70%"><stop offset="0" stop-color="#5EEAD4"/><stop offset="1" stop-color="#0D9488"/></radialGradient>
+                        </defs>
+                        <g class="float-slow">
+                            <polygon points="150,110 200,82 250,110 250,168 200,196 150,168" fill="none" stroke="rgba(148,163,184,.35)" stroke-width="2"/>
+                            <polygon points="250,168 300,140 350,168 350,226 300,254 250,226" fill="none" stroke="rgba(148,163,184,.35)" stroke-width="2"/>
+                            <polygon points="170,246 220,218 270,246 270,304 220,332 170,304" fill="none" stroke="rgba(148,163,184,.18)" stroke-width="2"/>
+                        </g>
+                        <g stroke="rgba(56,189,248,.55)" stroke-width="3">
+                            <line class="bond" x1="120" y1="250" x2="200" y2="200"/>
+                            <line class="bond" x1="200" y1="200" x2="300" y2="220"/>
+                            <line class="bond" x1="300" y1="220" x2="380" y2="150"/>
+                            <line class="bond" x1="300" y1="220" x2="360" y2="300"/>
+                            <line class="bond" x1="200" y1="200" x2="190" y2="110"/>
+                        </g>
+                        <g class="float">
+                            <circle cx="120" cy="250" r="16" fill="url(#nodeT)"/>
+                            <circle cx="200" cy="200" r="24" fill="url(#nodeC)"/>
+                            <circle cx="300" cy="220" r="24" fill="url(#nodeC)"/>
+                            <circle cx="380" cy="150" r="20" fill="url(#nodeO)"/>
+                            <circle cx="360" cy="300" r="14" fill="url(#nodeT)"/>
+                            <circle cx="190" cy="110" r="12" fill="url(#nodeT)"/>
+                        </g>
+                    </svg>
+                    <div class="absolute left-4 top-4 bg-navy/80 border border-white/15 px-3 py-2">
+                        <p class="text-[10px] tracking-[.16em] text-white/50">TARGET</p>
+                        <p class="text-[14px] font-semibold">Acetaldehyde <span class="font-mono text-cyan-light">CH₃CHO</span></p>
+                    </div>
+                    <div class="absolute right-4 bottom-4 bg-navy/80 border border-white/15 px-3 py-2 text-right">
+                        <p class="text-[10px] tracking-[.16em] text-white/50">FORMULA</p>
+                        <p class="text-[14px] font-semibold" data-en="17 herbal ingredients">17종 한방원료 배합</p>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Stat strip -->
-    <div class="relative border-t border-white/10">
-        <div class="wrap grid grid-cols-2 lg:grid-cols-4">
-            <div class="py-7 pr-4 lg:border-r border-white/10">
-                <p class="text-4xl sm:text-5xl font-black tracking-tight"><span data-count="17">17</span><span class="text-2xl text-white/60 ml-1" data-en="kinds">종</span></p>
-                <p class="mt-1 text-[14px] text-white/60" data-en="Herbal ingredients">천연 한방 원료</p>
-            </div>
-            <div class="py-7 lg:px-8 lg:border-r border-white/10">
-                <p class="text-4xl sm:text-5xl font-black tracking-tight"><span data-count="3">3</span><span class="text-2xl text-white/60 ml-1">mm</span></p>
-                <p class="mt-1 text-[14px] text-white/60" data-en="Micro pill size">초소형 마이크로 환</p>
-            </div>
-            <div class="py-7 pr-4 lg:px-8 lg:border-r border-white/10 border-t lg:border-t-0 border-white/10">
-                <p class="text-[26px] leading-[1.35] sm:text-5xl sm:leading-none font-black tracking-tight">HACCP<span class="text-point">·</span><br class="sm:hidden">GMP</p>
-                <p class="mt-1 text-[14px] text-white/60" data-en="Certified facility">검증된 시설 생산</p>
-            </div>
-            <div class="py-7 lg:px-8 border-t lg:border-t-0 border-white/10">
-                <p class="text-4xl sm:text-5xl font-black tracking-tight"><span data-count="3">3</span><span class="text-2xl text-white/60 ml-1" data-en="countries">개국</span></p>
-                <p class="mt-1 text-[14px] text-white/60" data-en="Global trade shows">글로벌 전시 참가</p>
+                <dl class="grid grid-cols-3 border-t border-white/10 text-center">
+                    <div class="py-4 border-r border-white/10"><dt class="text-[10px] tracking-[.14em] text-white/45">PIPELINE</dt><dd class="mt-1 text-2xl font-black"><span data-count="4">4</span><span class="text-sm font-semibold text-white/60 ml-0.5">Phase</span></dd></div>
+                    <div class="py-4 border-r border-white/10"><dt class="text-[10px] tracking-[.14em] text-white/45">MICRO PILL</dt><dd class="mt-1 text-2xl font-black"><span data-count="3">3</span><span class="text-sm font-semibold text-white/60 ml-0.5">mm</span></dd></div>
+                    <div class="py-4"><dt class="text-[10px] tracking-[.14em] text-white/45">GLOBAL</dt><dd class="mt-1 text-2xl font-black"><span data-count="3">3</span><span class="text-sm font-semibold text-white/60 ml-0.5" data-en="countries">개국</span></dd></div>
+                </dl>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ===== Section 2: R&D Science ===== -->
-<section id="rnd" class="bg-soft py-20 lg:py-28">
+<!-- ===== Brand Identity & Philosophy ===== -->
+<section id="vision" class="bg-white py-20 lg:py-28">
+    <div class="wrap">
+        <div class="reveal">
+            <p class="eyebrow text-cyan">CORPORATE VISION</p>
+            <h2 class="mt-4 text-4xl sm:text-5xl font-black tracking-tight" data-en="The name is the mission.">이름이 곧 사명입니다</h2>
+        </div>
+
+        <!-- ALCOHOL + FIX = ALCOFIX -->
+        <div class="mt-12 bg-navy text-white relative overflow-hidden reveal">
+            <div class="absolute inset-0 grid-dark" aria-hidden="true"></div>
+            <div class="relative px-6 sm:px-10 lg:px-16 py-12 lg:py-16 grid lg:grid-cols-12 gap-10 items-center">
+                <div class="lg:col-span-8 flex flex-wrap items-baseline gap-x-4 sm:gap-x-6 gap-y-2 text-[44px] sm:text-7xl xl:text-8xl font-black tracking-tighter leading-none">
+                    <span>ALCO<span class="text-white/25">HOL</span></span>
+                    <span class="text-cyan-light font-light">+</span>
+                    <span>FIX</span>
+                    <span class="text-cyan-light font-light">=</span>
+                    <span class="text-coral">ALCOFIX</span>
+                </div>
+                <div class="lg:col-span-4 lg:border-l border-white/15 lg:pl-10">
+                    <p class="text-lg font-semibold italic">"We fix what alcohol leaves behind."</p>
+                    <p class="mt-4 text-[16px] leading-relaxed text-white/70"
+                       data-en="ALCOFIX is an Alcohol Total Solution company founded to solve the physical and social problems that arise before and after drinking.">
+                        ALCOFIX는 음주 전후 발생하는 신체적·사회적 문제를 해결하기 위해 설립된 <b class="text-white">알코올 토탈 솔루션(Alcohol Total Solution)</b> 기업입니다.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Business areas -->
+        <div class="mt-4 grid md:grid-cols-2 gap-4">
+            <article class="reveal group relative border border-slate-200 p-8 lg:p-10 overflow-hidden transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-navy/10">
+                <div class="absolute right-0 top-0 w-40 h-40 grid-light" aria-hidden="true"></div>
+                <div class="relative flex items-start justify-between">
+                    <span class="w-12 h-12 rounded-full bg-cyan-soft text-cyan flex items-center justify-center"><i data-lucide="flask-conical" class="w-6 h-6"></i></span>
+                    <span class="text-[12px] font-bold tracking-[.14em] px-2.5 py-1 bg-navy text-white">CORE BUSINESS</span>
+                </div>
+                <p class="relative mt-10 text-[13px] font-semibold tracking-[.16em] text-slate-400">01</p>
+                <h3 class="relative mt-1 text-3xl font-black tracking-tight">Health Functional Food</h3>
+                <p class="relative mt-1 text-lg font-semibold text-cyan" data-en="Health functional food">건강기능식품</p>
+                <p class="relative mt-4 text-[16px] leading-relaxed text-slate-600" data-en="Functional products built on scientifically verified ingredients and our proprietary formulation technology.">과학적으로 검증된 원료와 독자적 배합 기술로 일상 속 건강을 지키는 기능성 제품을 개발합니다.</p>
+            </article>
+            <article class="reveal group relative border border-slate-200 p-8 lg:p-10 overflow-hidden transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-navy/10">
+                <div class="absolute right-0 top-0 w-40 h-40 grid-light" aria-hidden="true"></div>
+                <div class="relative flex items-start justify-between">
+                    <span class="w-12 h-12 rounded-full bg-teal/10 text-teal flex items-center justify-center"><i data-lucide="sparkles" class="w-6 h-6"></i></span>
+                    <span class="text-[12px] font-bold tracking-[.14em] px-2.5 py-1 border border-navy text-navy">COMING SOON</span>
+                </div>
+                <p class="relative mt-10 text-[13px] font-semibold tracking-[.16em] text-slate-400">02</p>
+                <h3 class="relative mt-1 text-3xl font-black tracking-tight">Beauty &amp; Cosmetics</h3>
+                <p class="relative mt-1 text-lg font-semibold text-teal" data-en="Beauty &amp; cosmetics">뷰티·코스메틱</p>
+                <p class="relative mt-4 text-[16px] leading-relaxed text-slate-600" data-en="Plant-based functional cosmetics that care for skin affected by drinking.">천연 식물성 원료를 기반으로, 음주 후 무너진 피부를 케어하는 기능성 화장품을 준비하고 있습니다.</p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- ===== R&D Leadership ===== -->
+<section id="rnd" class="bg-slate-50 py-20 lg:py-28">
     <div class="wrap">
         <div class="grid lg:grid-cols-12 gap-6 items-end reveal">
             <div class="lg:col-span-7">
-                <p class="eyebrow text-point">R&amp;D SCIENCE</p>
-                <h2 class="mt-4 text-4xl sm:text-5xl font-black tracking-tight leading-tight"
-                    data-en="Numbers, not adjectives.<br>The science inside Hwakkaeyu.">형용사가 아닌 숫자로 증명하는<br>확깨유의 기술력</h2>
+                <p class="eyebrow text-cyan">R&amp;D LEADERSHIP</p>
+                <h2 class="mt-4 text-4xl sm:text-5xl font-black tracking-tight leading-tight" data-en="Led by a researcher who has<br>run the full R&amp;D cycle.">전 주기 R&amp;D를 직접 수행해온<br>연구자가 이끄는 기업</h2>
             </div>
-            <p class="lg:col-span-5 text-[17px] leading-relaxed text-navy/65"
-               data-en="From ingredient selection to pill size and manufacturing, every step is designed and verified with data.">
-                원료 선정부터 제형 크기, 제조 환경까지 — 모든 과정을 데이터로 설계하고 검증합니다.</p>
+            <p class="lg:col-span-5 text-[17px] leading-relaxed text-slate-600" data-en="From ingredient discovery and functional validation to formulation, quality control and clinical linkage.">소재 발굴부터 기능성 검증, 제형 개발, 품질관리, 임상 연계까지.</p>
         </div>
 
-        <div class="mt-12 grid sm:grid-cols-2 xl:grid-cols-4 gap-4">
-            <!-- 17 -->
-            <article class="reveal group bg-white border border-line p-7 lg:p-8 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-navy/10">
-                <div class="flex items-center justify-between">
-                    <span class="w-11 h-11 rounded-full bg-navy-100 text-navy flex items-center justify-center"><i data-lucide="sprout" class="w-5 h-5"></i></span>
-                    <span class="text-[12px] font-semibold tracking-[.18em] text-navy/40">01</span>
+        <!-- Founder authority card -->
+        <div class="mt-12 grid lg:grid-cols-12 bg-white border border-slate-200 reveal">
+            <div class="lg:col-span-4 relative bg-navy text-white p-8 sm:p-10 overflow-hidden">
+                <div class="absolute inset-0 grid-dark" aria-hidden="true"></div>
+                <div class="relative">
+                    <p class="eyebrow text-cyan-light">FOUNDER &amp; CEO</p>
+                    <img src="images/founder.jpg" alt="김성진 대표이사" class="mt-6 w-36 h-48 object-cover border border-white/20">
+                    <p class="mt-6 text-4xl font-black tracking-tight" data-en="Sungjin Kim">김성진</p>
+                    <p class="mt-1 text-[15px] text-white/60" data-en="CEO, ALCOFIX Co., Ltd.">주식회사 알코픽스 대표이사</p>
+                    <p class="mt-6 text-[16px] leading-relaxed text-white/80" data-en="A researcher who has personally carried out the full cycle — ingredient discovery, functional validation, formulation, quality control and clinical linkage.">소재 발굴부터 기능성 검증, 제형 개발, 품질관리, 임상 연계까지 <b class="text-white">전 주기를 직접 수행해온 전문 연구자</b>입니다.</p>
+                    <p class="mt-6 flex items-center gap-2 text-[14px] text-white/60"><i data-lucide="graduation-cap" class="w-4 h-4 text-cyan-light shrink-0"></i><span data-en="Daejeon University, Life Science (Microbiology)">대전대학교 생명과학과 미생물 전공</span></p>
                 </div>
-                <p class="mt-8 text-7xl font-black tracking-tighter"><span data-count="17">17</span><span class="text-3xl ml-1" data-en="kinds">종</span></p>
-                <h3 class="mt-3 text-xl font-bold" data-en="Natural herbal blend">천연 한방 원료 배합</h3>
-                <p class="mt-2 text-[15px] leading-relaxed text-navy/60" data-en="A systematic blend led by hovenia, mistletoe and alder.">헛개나무·겨우살이·오리나무를 중심으로 체계적으로 배합했습니다.</p>
-                <div class="mt-6 flex flex-wrap gap-1.5 text-[13px]">
-                    <span class="px-2.5 py-1 bg-navy text-white" data-en="Hovenia">헛개나무</span>
-                    <span class="px-2.5 py-1 bg-navy text-white" data-en="Mistletoe">겨우살이</span>
-                    <span class="px-2.5 py-1 bg-navy text-white" data-en="Alder">오리나무</span>
-                    <span class="px-2.5 py-1 border border-line text-navy/60" data-en="+14 more">외 14종</span>
-                </div>
-            </article>
+            </div>
 
-            <!-- 3mm -->
-            <article class="reveal group bg-white border border-line p-7 lg:p-8 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-navy/10">
-                <div class="flex items-center justify-between">
-                    <span class="w-11 h-11 rounded-full bg-navy-100 text-navy flex items-center justify-center"><i data-lucide="circle-dot" class="w-5 h-5"></i></span>
-                    <span class="text-[12px] font-semibold tracking-[.18em] text-navy/40">02</span>
-                </div>
-                <p class="mt-8 text-7xl font-black tracking-tighter"><span data-count="3">3</span><span class="text-3xl ml-1">mm</span></p>
-                <h3 class="mt-3 text-xl font-bold" data-en="Micro pill">초소형 마이크로 환</h3>
-                <p class="mt-2 text-[15px] leading-relaxed text-navy/60" data-en="Easy to swallow, pressed directly from raw materials.">편안한 목넘김, 원물을 그대로 눌러 담은 원물압착 기술.</p>
-                <div class="mt-6 flex items-end gap-4" aria-hidden="true">
-                    <div class="flex flex-col items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-point"></span><span class="text-[11px] text-navy/50">3mm</span></div>
-                    <div class="flex flex-col items-center gap-1.5"><span class="w-7 h-3.5 rounded-full border border-navy/25"></span><span class="text-[11px] text-navy/40" data-en="Tablet">정제</span></div>
-                    <div class="flex flex-col items-center gap-1.5"><span class="w-9 h-4 rounded-full border border-navy/25"></span><span class="text-[11px] text-navy/40" data-en="Capsule">캡슐</span></div>
-                    <img src="images/prod-hwan.jpg" alt="" class="ml-auto w-20 h-14 object-cover">
-                </div>
-            </article>
-
-            <!-- 0g -->
-            <article class="reveal group bg-white border border-line p-7 lg:p-8 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-navy/10">
-                <div class="flex items-center justify-between">
-                    <span class="w-11 h-11 rounded-full bg-navy-100 text-navy flex items-center justify-center"><i data-lucide="flask-conical" class="w-5 h-5"></i></span>
-                    <span class="text-[12px] font-semibold tracking-[.18em] text-navy/40">03</span>
-                </div>
-                <p class="mt-8 text-7xl font-black tracking-tighter">0<span class="text-3xl ml-1">g</span></p>
-                <h3 class="mt-3 text-xl font-bold" data-en="Minimal excipients">불필요한 부형제 최소화</h3>
-                <p class="mt-2 text-[15px] leading-relaxed text-navy/60" data-en="Fewer fillers, more naturally derived ingredients.">군더더기를 덜어내고 자연 유래 성분의 비중을 높였습니다.</p>
-                <div class="mt-6">
-                    <div class="flex justify-between text-[12px] text-navy/50"><span data-en="Natural ingredients">자연 유래 성분</span><span data-en="Excipients">부형제</span></div>
-                    <div class="mt-2 h-2.5 bg-navy-100 flex" aria-hidden="true"><span class="h-full bg-navy" style="width:100%"></span></div>
-                </div>
-            </article>
-
-            <!-- HACCP/GMP -->
-            <article class="reveal group bg-white border border-line p-7 lg:p-8 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-navy/10">
-                <div class="flex items-center justify-between">
-                    <span class="w-11 h-11 rounded-full bg-navy-100 text-navy flex items-center justify-center"><i data-lucide="badge-check" class="w-5 h-5"></i></span>
-                    <span class="text-[12px] font-semibold tracking-[.18em] text-navy/40">04</span>
-                </div>
-                <p class="mt-8 text-5xl font-black tracking-tighter leading-[1.1]">HACCP<br>GMP</p>
-                <h3 class="mt-3 text-xl font-bold" data-en="Verified manufacturing">검증된 시설 생산</h3>
-                <p class="mt-2 text-[15px] leading-relaxed text-navy/60" data-en="Produced under strict quality control at a HACCP·GMP facility (UD Bio).">HACCP·GMP 기준 시설(유디바이오)에서 엄격한 품질관리로 생산합니다.</p>
-                <div class="mt-6 flex items-center gap-3">
-                    <img src="images/mark-haccp.avif" alt="HACCP 인증 마크" class="h-16 w-16 object-contain bg-white border border-line p-1">
-                    <img src="images/mark-gmp.png" alt="GMP 인증 마크" class="h-16 w-16 object-contain bg-white border border-line p-1">
-                </div>
-            </article>
-        </div>
-
-        <!-- Mechanism -->
-        <div class="mt-5 relative overflow-hidden bg-navy text-white reveal">
-            <div class="absolute inset-0 grid-bg" aria-hidden="true"></div>
-            <div class="relative p-7 sm:p-10 lg:p-14">
-                <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
-                    <div>
-                        <p class="eyebrow text-white/50">MECHANISM</p>
-                        <h3 class="mt-3 text-3xl sm:text-4xl font-black tracking-tight" data-en="How it works in 3 steps">알코올 분해 3단계 기전</h3>
-                    </div>
-                    <p class="text-[14px] text-white/50 max-w-md" data-en="Illustrative process of how Hwakkaeyu supports the body after drinking.">확깨유가 음주 후 우리 몸의 회복을 돕는 과정을 단계별로 정리했습니다.</p>
-                </div>
-
-                <ol class="mt-10 grid md:grid-cols-3 gap-4 md:gap-0">
-                    <li class="relative md:pr-10">
-                        <div class="flex items-center gap-4">
-                            <span class="w-14 h-14 rounded-full bg-white/10 border border-white/20 flex items-center justify-center shrink-0"><i data-lucide="wine" class="w-6 h-6"></i></span>
-                            <span class="hidden md:block flex-1 h-px bg-gradient-to-r from-white/40 to-white/5"></span>
-                        </div>
-                        <p class="mt-6 text-[13px] font-semibold tracking-[.18em] text-point">STEP 01</p>
-                        <p class="mt-1 text-2xl font-bold" data-en="Drinking">음주</p>
-                        <p class="mt-2 text-[15px] leading-relaxed text-white/65" data-en="Alcohol is broken down in the body, producing acetaldehyde.">알코올이 체내에서 분해되며 숙취의 원인 물질인 아세트알데히드가 발생합니다.</p>
-                        <p class="mt-4 inline-block font-mono text-[13px] px-2.5 py-1 bg-white/10">CH₃CHO</p>
+            <div class="lg:col-span-8 p-8 sm:p-10">
+                <p class="eyebrow text-slate-500">CAREER</p>
+                <ol class="mt-5 relative border-l-2 border-slate-200 ml-2 space-y-6">
+                    <li class="relative pl-7">
+                        <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-white border-2 border-slate-400"></span>
+                        <p class="text-lg font-bold"><span data-en="Hankook Shinyak">한국신약</span> <span class="font-medium text-slate-500" data-en="Quality Control · Development">품질관리부 · 개발팀</span></p>
+                        <p class="text-[15px] text-slate-600" data-en="Raw material quality analysis, product development">원료 품질분석, 제품 개발</p>
                     </li>
-                    <li class="relative md:px-5 border-t md:border-t-0 border-white/10 pt-6 md:pt-0">
-                        <div class="flex items-center gap-4">
-                            <span class="w-14 h-14 rounded-full bg-point flex items-center justify-center shrink-0 shadow-lg shadow-point/40"><i data-lucide="activity" class="w-6 h-6"></i></span>
-                            <span class="hidden md:block flex-1 h-px bg-gradient-to-r from-white/40 to-white/5"></span>
-                        </div>
-                        <p class="mt-6 text-[13px] font-semibold tracking-[.18em] text-point">STEP 02</p>
-                        <p class="mt-1 text-2xl font-bold" data-en="Support">분해 활성화</p>
-                        <p class="mt-2 text-[15px] leading-relaxed text-white/65" data-en="ALCOFIX's herbal blend is absorbed and supports the body's metabolism.">ALCOFIX 독자 원료가 체내에 흡수되어 대사 과정을 지원합니다.</p>
+                    <li class="relative pl-7">
+                        <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-white border-2 border-slate-400"></span>
+                        <p class="text-lg font-bold"><span data-en="Jungwoo Shinyak">정우신약</span> <span class="font-medium text-slate-500" data-en="Central Research Institute">중앙연구소</span></p>
+                        <p class="text-[15px] text-slate-600" data-en="New product development (formulation), clinical trials">신제품 개발(제형), 임상시험</p>
                     </li>
-                    <li class="relative md:pl-5 border-t md:border-t-0 border-white/10 pt-6 md:pt-0">
-                        <span class="w-14 h-14 rounded-full bg-white text-navy flex items-center justify-center"><i data-lucide="sunrise" class="w-6 h-6"></i></span>
-                        <p class="mt-6 text-[13px] font-semibold tracking-[.18em] text-point">STEP 03</p>
-                        <p class="mt-1 text-2xl font-bold" data-en="A fresh morning">상쾌한 아침</p>
-                        <p class="mt-2 text-[15px] leading-relaxed text-white/65" data-en="Helps ease hangover discomfort and fatigue, restoring everyday energy.">숙취와 피로감 완화를 도와 일상의 활력을 되찾습니다.</p>
+                    <li class="relative pl-7">
+                        <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-white border-2 border-slate-400"></span>
+                        <p class="text-lg font-bold"><span data-en="RPG LAB">알피지랩</span> <span class="font-medium text-slate-500" data-en="Dedicated R&amp;D Department">연구개발전담부서</span></p>
+                        <p class="text-[15px] text-slate-600" data-en="Product development, testing and analysis">제품 개발, 시험 분석</p>
+                    </li>
+                    <li class="relative pl-7">
+                        <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-cyan border-2 border-cyan"></span>
+                        <p class="text-lg font-bold">ALCOFIX <span class="font-medium text-slate-500" data-en="CEO">대표</span></p>
+                        <p class="text-[15px] text-slate-600" data-en="Overall product development and management">제품 개발 및 경영 총괄</p>
                     </li>
                 </ol>
-                <p class="mt-10 pt-5 border-t border-white/10 text-[12px] text-white/40" data-en="※ Results may vary by individual and amount consumed. This product is not a medicine for preventing or treating disease.">※ 개인의 체질과 음주량에 따라 차이가 있을 수 있으며, 본 제품은 질병의 예방 및 치료를 위한 의약품이 아닙니다.</p>
+
+                <p class="mt-10 eyebrow text-slate-500">KEY RESEARCH</p>
+                <div class="mt-5 grid sm:grid-cols-2 gap-3">
+                    <article class="border border-slate-200 p-5 transition-all hover:border-cyan hover:shadow-lg hover:shadow-navy/5">
+                        <div class="flex items-center gap-2 text-cyan"><i data-lucide="shield-plus" class="w-4 h-4"></i><span class="text-[12px] font-bold tracking-[.14em]">R-01 · FUNCTIONAL MATERIAL</span></div>
+                        <h4 class="mt-3 text-lg font-bold" data-en="Phellinus linteus mycelium functional material">상황버섯 균사체 기능성 소재</h4>
+                        <p class="mt-2 text-[14.5px] leading-relaxed text-slate-600" data-en="Health functional food material for immune enhancement and joint health. Led the full process from mycelium culture and extraction optimization to mass production, spray-dry formulation, and efficacy/toxicity evaluation.">면역 증강·골관절 개선 건강기능식품 원료. 균사체 배양과 추출조건 최적화부터 대량생산 공정, 분무건조 제형화, 유효성·독성 평가까지 전 과정 수행.</p>
+                    </article>
+                    <article class="border border-slate-200 p-5 transition-all hover:border-cyan hover:shadow-lg hover:shadow-navy/5">
+                        <div class="flex items-center gap-2 text-cyan"><i data-lucide="flask-round" class="w-4 h-4"></i><span class="text-[12px] font-bold tracking-[.14em]">R-02 · HERBAL MEDICINE</span></div>
+                        <h4 class="mt-3 text-lg font-bold" data-en="ChondroT herbal preparation">ChondroT 한약제제</h4>
+                        <p class="mt-2 text-[14.5px] leading-relaxed text-slate-600" data-en="Multi-herbal preparation for degenerative arthritis. Component standardization (HPLC profiling), formulation stability evaluation, and IND response.">퇴행성 관절염 치료용 복합 생약제제. 성분 표준화(HPLC 프로파일링), 제제 안정성 평가, 임상시험계획(IND) 대응.</p>
+                    </article>
+                    <article class="border border-slate-200 p-5 transition-all hover:border-cyan hover:shadow-lg hover:shadow-navy/5">
+                        <div class="flex items-center gap-2 text-teal"><i data-lucide="microscope" class="w-4 h-4"></i><span class="text-[12px] font-bold tracking-[.14em]">R-03 · PROBIOTICS</span></div>
+                        <h4 class="mt-3 text-lg font-bold" data-en="Lonicera probiotic fermented beverage">금은화 유산균 발효음료</h4>
+                        <p class="mt-2 text-[14.5px] leading-relaxed text-slate-600" data-en="A functional beverage combining herbal materials with probiotics.">한방 소재와 프로바이오틱스를 접목한 기능성 음료.</p>
+                    </article>
+                    <article class="border border-coral/40 bg-coral/[.03] p-5 transition-all hover:border-coral hover:shadow-lg hover:shadow-navy/5">
+                        <div class="flex items-center gap-2 text-coral"><i data-lucide="badge-check" class="w-4 h-4"></i><span class="text-[12px] font-bold tracking-[.14em]">R-04 · COMMERCIALIZED</span></div>
+                        <h4 class="mt-3 text-lg font-bold" data-en="Hangover remedy Hwakkaeyu">숙취해소제 확깨유</h4>
+                        <p class="mt-2 text-[14.5px] leading-relaxed text-slate-600" data-en="Combined herbal materials with modern extraction processes; trademark registration and commercialization completed.">한방 소재와 현대 추출공정을 결합해 숙취해소 기능을 구현하고 상표 등록·상품화까지 완료.</p>
+                    </article>
+                </div>
             </div>
         </div>
+
+        <!-- Core tech pillars -->
+        <div class="mt-16 reveal">
+            <p class="eyebrow text-slate-500">CORE TECH PILLARS</p>
+            <h3 class="mt-3 text-3xl font-black tracking-tight" data-en="Four pillars of our technology">알코픽스 기술의 네 가지 기둥</h3>
+        </div>
+        <div class="mt-8 grid sm:grid-cols-2 xl:grid-cols-4 gap-4">
+            <article class="reveal bg-white border-t-2 border-cyan p-7 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-navy/10">
+                <div class="flex items-center justify-between"><span class="text-5xl font-black text-slate-200">01</span><i data-lucide="leaf" class="w-7 h-7 text-cyan"></i></div>
+                <h4 class="mt-6 text-xl font-bold" data-en="Proprietary formulation">독자적 원료 배합 기술</h4>
+                <p class="mt-2 text-[15px] leading-relaxed text-slate-600" data-en="A blend of 17 herbal ingredients built on 100% natural materials.">100% 천연 소재를 기반으로 17종 한방원료를 배합합니다.</p>
+                <p class="mt-5 text-[13px] font-semibold text-cyan">100% NATURAL · 17 HERBS</p>
+            </article>
+            <article class="reveal bg-white border-t-2 border-cyan p-7 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-navy/10">
+                <div class="flex items-center justify-between"><span class="text-5xl font-black text-slate-200">02</span><i data-lucide="circle-dot" class="w-7 h-7 text-cyan"></i></div>
+                <h4 class="mt-6 text-xl font-bold" data-en="Raw-material pressing">원물압착기술</h4>
+                <p class="mt-2 text-[15px] leading-relaxed text-slate-600" data-en="A 3mm micro pill process that keeps excipients to a minimum.">부형제를 최소화한 3mm 초소형 환 가공 기술입니다.</p>
+                <div class="mt-5 flex items-center gap-3">
+                    <span class="w-3 h-3 rounded-full bg-coral" aria-hidden="true"></span>
+                    <span class="text-[13px] font-semibold text-cyan">3MM MICRO PILL</span>
+                    <img src="images/prod-hwan.jpg" alt="손가락 끝에 올린 확깨유 환" class="ml-auto w-16 h-11 object-cover">
+                </div>
+            </article>
+            <article class="reveal bg-white border-t-2 border-teal p-7 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-navy/10">
+                <div class="flex items-center justify-between"><span class="text-5xl font-black text-slate-200">03</span><i data-lucide="atom" class="w-7 h-7 text-teal"></i></div>
+                <h4 class="mt-6 text-xl font-bold" data-en="Acetaldehyde metabolism research">아세트알데히드 대사 기전 연구</h4>
+                <p class="mt-2 text-[15px] leading-relaxed text-slate-600" data-en="Researching how our ingredients support the body's process of breaking down acetaldehyde after drinking.">음주 후 체내 아세트알데히드 대사 과정을 지원하는 원료 작용 기전을 연구합니다.</p>
+                <p class="mt-5 font-mono text-[13px] text-teal">C₂H₅OH → CH₃CHO → CH₃COOH</p>
+            </article>
+            <article class="reveal bg-white border-t-2 border-navy p-7 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-navy/10">
+                <div class="flex items-center justify-between"><span class="text-5xl font-black text-slate-200">04</span><i data-lucide="shield-check" class="w-7 h-7 text-navy"></i></div>
+                <h4 class="mt-6 text-xl font-bold" data-en="HACCP·GMP standards">HACCP·GMP 제조 표준 관리</h4>
+                <p class="mt-2 text-[15px] leading-relaxed text-slate-600" data-en="Manufactured under strict quality control at a HACCP·GMP facility (UD Bio).">HACCP·GMP 기준 시설(유디바이오)에서 엄격한 품질관리로 생산합니다.</p>
+                <div class="mt-4 flex items-center gap-2">
+                    <img src="images/mark-haccp.avif" alt="HACCP 인증 마크" class="h-12 w-12 object-contain bg-white border border-slate-200 p-1">
+                    <img src="images/mark-gmp.png" alt="GMP 인증 마크" class="h-12 w-12 object-contain bg-white border border-slate-200 p-1">
+                </div>
+            </article>
+        </div>
+        <p class="mt-5 text-[12px] text-slate-400" data-en="※ Results may vary by individual. Our products are not medicines for preventing or treating disease.">※ 개인에 따라 차이가 있을 수 있으며, 당사 제품은 질병의 예방 및 치료를 위한 의약품이 아닙니다.</p>
     </div>
 </section>
 
-<!-- ===== Section 3: Trust ===== -->
-<section id="global" class="bg-white py-20 lg:py-28">
+<!-- ===== Pipeline ===== -->
+<section id="pipeline" class="bg-white py-20 lg:py-28">
     <div class="wrap">
         <div class="reveal">
-            <p class="eyebrow text-point">TRUST &amp; CREDIBILITY</p>
-            <h2 class="mt-4 text-4xl sm:text-5xl font-black tracking-tight leading-tight" data-en="Built by a researcher,<br>proven on the global stage.">연구자가 만들고,<br>세계 무대에서 검증받습니다</h2>
+            <p class="eyebrow text-cyan">PIPELINE ROADMAP</p>
+            <h2 class="mt-4 text-4xl sm:text-5xl font-black tracking-tight leading-tight max-w-4xl" data-en="An R&amp;D pipeline that cares for the entire drinking lifecycle">음주 라이프사이클 전주기를 케어하는<br class="hidden md:block">알코픽스의 R&amp;D 파이프라인</h2>
         </div>
 
-        <!-- Founder -->
-        <div class="mt-12 grid lg:grid-cols-12 border border-line reveal">
-            <div class="lg:col-span-4 bg-soft grid-bg-light p-7 sm:p-10 flex flex-col">
-                <p class="eyebrow text-navy/50">FOUNDER</p>
-                <div class="mt-6 flex items-end gap-5">
-                    <img src="images/founder.jpg" alt="김성진 대표이사" class="w-28 h-36 sm:w-32 sm:h-40 object-cover border border-line bg-white">
-                    <div>
-                        <p class="text-3xl font-black tracking-tight" data-en="Sungjin Kim">김성진</p>
-                        <p class="mt-1 text-[14px] text-navy/60" data-en="CEO · R&amp;D Researcher">대표이사 · R&amp;D 연구자</p>
+        <!-- Flagship showcase -->
+        <div class="mt-12 relative overflow-hidden bg-navy text-white reveal">
+            <div class="absolute inset-0 grid-dark" aria-hidden="true"></div>
+            <div class="absolute -right-24 -bottom-24 w-[420px] h-[420px] rounded-full bg-coral/20 blur-3xl" aria-hidden="true"></div>
+            <div class="relative grid lg:grid-cols-12 items-center">
+                <div class="lg:col-span-7 p-8 sm:p-10 lg:p-14">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="text-[12px] font-bold tracking-[.14em] px-2.5 py-1 bg-coral">PHASE 1 · LAUNCHED</span>
+                        <span class="text-[12px] font-bold tracking-[.14em] px-2.5 py-1 border border-white/30 text-white/80">FLAGSHIP BRAND</span>
                     </div>
+                    <p class="mt-6 text-[15px] font-semibold text-cyan-light" data-en="The first commercial result of ALCOFIX bio-technology">ALCOFIX 바이오 기술의 첫 상용화 결실</p>
+                    <h3 class="mt-2 text-4xl sm:text-5xl font-black tracking-tight leading-tight" data-en="17-herb raw-pressed pill<br><span class=&quot;text-coral&quot;>Hwakkaeyu</span>">17종 한방 원물압착 환<br><span class="text-coral">[확깨유]</span></h3>
+                    <ul class="mt-8 grid sm:grid-cols-3 gap-px bg-white/10 border border-white/10">
+                        <li class="bg-navy p-4"><p class="text-3xl font-black">17<span class="text-base text-white/60 ml-1" data-en="herbs">종</span></p><p class="mt-1 text-[13px] text-white/60" data-en="Herbal ingredients">한방원료</p></li>
+                        <li class="bg-navy p-4"><p class="text-3xl font-black">3<span class="text-base text-white/60 ml-1">mm</span></p><p class="mt-1 text-[13px] text-white/60" data-en="Micro pill">초소형 마이크로 환</p></li>
+                        <li class="bg-navy p-4"><p class="text-2xl font-black leading-9">HACCP·GMP</p><p class="mt-1 text-[13px] text-white/60" data-en="Certified facility">시설 제조</p></li>
+                    </ul>
+                    <a href="https://smartstore.naver.com/alcofixkorea" target="_blank" rel="noopener"
+                       class="group mt-9 inline-flex items-center gap-3 bg-coral hover:bg-coral-dark text-white text-[17px] font-bold px-8 py-5 transition-all hover:-translate-y-0.5 shadow-lg shadow-coral/30">
+                        <i data-lucide="store" class="w-5 h-5"></i>
+                        <span data-en="Visit the Hwakkaeyu brand store">확깨유 전용 브랜드몰 바로가기</span>
+                        <i data-lucide="arrow-up-right" class="w-5 h-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"></i>
+                    </a>
                 </div>
-                <p class="mt-6 text-[14px] text-navy/60" data-en="Microbiology, Dept. of Life Science, Daejeon University">대전대학교 생명과학과 미생물 전공</p>
-            </div>
-            <div class="lg:col-span-8 p-7 sm:p-10 lg:p-12">
-                <i data-lucide="quote" class="w-9 h-9 text-point"></i>
-                <p class="mt-4 text-2xl sm:text-3xl font-bold leading-snug tracking-tight"
-                   data-en="Hands-on R&amp;D know-how covering the full cycle — from ingredient discovery and standardization to clinical protocols and quality control.">
-                    소재 발굴부터 성분 표준화, 임상시험 프로토콜, 품질관리까지<br class="hidden xl:block"> <span class="bg-gradient-to-t from-point/25 from-35% to-transparent to-35%">전 주기를 직접 검증한 R&amp;D 노하우</span></p>
-                <ol class="mt-10 grid sm:grid-cols-2 xl:grid-cols-4 gap-px bg-line border border-line">
-                    <li class="bg-white p-5">
-                        <p class="text-[12px] font-semibold tracking-[.14em] text-navy/40">PHARMA</p>
-                        <p class="mt-2 font-bold" data-en="Hankook Shinyak">한국신약</p>
-                        <p class="mt-1 text-[14px] text-navy/60" data-en="Quality control · Development">품질관리부 · 개발팀</p>
-                    </li>
-                    <li class="bg-white p-5">
-                        <p class="text-[12px] font-semibold tracking-[.14em] text-navy/40">PHARMA</p>
-                        <p class="mt-2 font-bold" data-en="Jungwoo Shinyak">정우신약</p>
-                        <p class="mt-1 text-[14px] text-navy/60" data-en="Central research lab · Clinical trials">중앙연구소 · 제형 개발, 임상시험</p>
-                    </li>
-                    <li class="bg-white p-5">
-                        <p class="text-[12px] font-semibold tracking-[.14em] text-navy/40">R&amp;D</p>
-                        <p class="mt-2 font-bold" data-en="RPG LAB">알피지랩</p>
-                        <p class="mt-1 text-[14px] text-navy/60" data-en="Dedicated R&amp;D department">연구개발전담부서 · 시험 분석</p>
-                    </li>
-                    <li class="bg-navy text-white p-5">
-                        <p class="text-[12px] font-semibold tracking-[.14em] text-white/50">NOW</p>
-                        <p class="mt-2 font-bold">ALCOFIX</p>
-                        <p class="mt-1 text-[14px] text-white/70" data-en="CEO · Product development">대표 · 제품 개발 총괄</p>
-                    </li>
-                </ol>
+                <div class="lg:col-span-5 relative h-72 sm:h-96 lg:h-full lg:min-h-[520px] flex items-center justify-center">
+                    <div class="absolute w-72 h-72 sm:w-96 sm:h-96 rounded-full border border-white/10" aria-hidden="true"></div>
+                    <div class="absolute w-52 h-52 sm:w-72 sm:h-72 rounded-full border border-dashed border-white/15" aria-hidden="true"></div>
+                    <img src="images/product-cutout.png" alt="확깨유 패키지" class="relative float h-[78%] w-auto drop-shadow-[0_30px_40px_rgba(0,0,0,.55)]">
+                </div>
             </div>
         </div>
 
-        <!-- Global footprint -->
-        <div class="mt-16 flex flex-col sm:flex-row sm:items-end justify-between gap-3 reveal">
+        <!-- Phase 2–4 -->
+        <div class="mt-4 grid md:grid-cols-3 gap-4">
+            <article class="reveal group bg-white border border-slate-200 overflow-hidden transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-navy/10">
+                <div class="aspect-[16/10] overflow-hidden relative">
+                    <img src="images/soon-liquid.jpg" alt="" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    <span class="absolute left-4 top-4 text-[12px] font-bold tracking-[.14em] px-2.5 py-1 bg-navy text-white">PHASE 2 · 2027</span>
+                </div>
+                <div class="p-6">
+                    <p class="flex items-center gap-1.5 text-[12px] font-semibold tracking-[.14em] text-cyan"><i data-lucide="droplets" class="w-3.5 h-3.5"></i>HANGOVER · LIQUID</p>
+                    <h3 class="mt-2 text-xl font-bold" data-en="High-concentration liquid hangover remedy">고농축 액상형 숙취해소제</h3>
+                    <p class="mt-2 text-[15px] text-slate-600" data-en="Faster, stronger absorption in the body">더 빠르고 강한 체내 흡수</p>
+                    <p class="mt-4 text-[12px] font-semibold text-slate-400" data-en="In development">개발 예정</p>
+                </div>
+            </article>
+            <article class="reveal group bg-white border border-slate-200 overflow-hidden transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-navy/10">
+                <div class="aspect-[16/10] overflow-hidden relative">
+                    <img src="images/soon-probiotics.jpg" alt="" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    <span class="absolute left-4 top-4 text-[12px] font-bold tracking-[.14em] px-2.5 py-1 bg-navy text-white">PHASE 3 · 2028</span>
+                </div>
+                <div class="p-6">
+                    <p class="flex items-center gap-1.5 text-[12px] font-semibold tracking-[.14em] text-teal"><i data-lucide="activity" class="w-3.5 h-3.5"></i>GUT · MICROBIOME</p>
+                    <h3 class="mt-2 text-xl font-bold" data-en="Complex probiotics">복합 유산균</h3>
+                    <p class="mt-2 text-[15px] text-slate-600" data-en="Restoring the gut microbiome after drinking">음주 후 무너진 장내 마이크로바이옴 복원</p>
+                    <p class="mt-4 text-[12px] font-semibold text-slate-400" data-en="In development">개발 예정</p>
+                </div>
+            </article>
+            <article class="reveal group bg-white border border-slate-200 overflow-hidden transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-navy/10">
+                <div class="aspect-[16/10] overflow-hidden relative">
+                    <img src="images/soon-mask.jpg" alt="" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    <span class="absolute left-4 top-4 text-[12px] font-bold tracking-[.14em] px-2.5 py-1 bg-navy text-white">PHASE 4 · 2030</span>
+                </div>
+                <div class="p-6">
+                    <p class="flex items-center gap-1.5 text-[12px] font-semibold tracking-[.14em] text-cyan"><i data-lucide="sparkles" class="w-3.5 h-3.5"></i>SKIN · RECOVERY</p>
+                    <h3 class="mt-2 text-xl font-bold" data-en="Recovery mask pack">리커버리 마스크팩</h3>
+                    <p class="mt-2 text-[15px] text-slate-600" data-en="Soothing heat and restoring the skin barrier after drinking">음주 후 열감 진정과 무너진 피부 장벽 복원</p>
+                    <p class="mt-4 text-[12px] font-semibold text-slate-400" data-en="In development">개발 예정</p>
+                </div>
+            </article>
+        </div>
+        <p class="mt-5 text-[13px] text-slate-400" data-en="※ Launch schedules may change depending on development.">※ 출시 일정은 개발 상황에 따라 변경될 수 있습니다.</p>
+    </div>
+</section>
+
+<!-- ===== Global Footprint ===== -->
+<section id="global" class="bg-slate-50 py-20 lg:py-28">
+    <div class="wrap">
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-5 reveal">
             <div>
-                <p class="eyebrow text-navy/50">GLOBAL FOOTPRINT</p>
-                <h3 class="mt-3 text-3xl font-black tracking-tight" data-en="Trade shows across Asia">아시아 주요 전시회 참가</h3>
+                <p class="eyebrow text-cyan">GLOBAL FOOTPRINT</p>
+                <h2 class="mt-4 text-4xl sm:text-5xl font-black tracking-tight leading-tight" data-en="Proven on the global stage">세계 무대에서 검증받는 알코픽스</h2>
             </div>
-            <p class="flex items-center gap-2 text-[14px] text-navy/60"><i data-lucide="globe" class="w-4 h-4"></i><span data-en="Indonesia · China · Japan">인도네시아 · 중국 · 일본</span></p>
+            <ul class="flex flex-wrap gap-2 text-[14px] font-semibold">
+                <li class="flex items-center gap-1.5 px-3 py-2 bg-white border border-slate-200"><i data-lucide="map-pin" class="w-4 h-4 text-coral"></i>Indonesia</li>
+                <li class="flex items-center gap-1.5 px-3 py-2 bg-white border border-slate-200"><i data-lucide="map-pin" class="w-4 h-4 text-coral"></i>China</li>
+                <li class="flex items-center gap-1.5 px-3 py-2 bg-white border border-slate-200"><i data-lucide="map-pin" class="w-4 h-4 text-coral"></i>Japan</li>
+            </ul>
         </div>
-        <div class="mt-8 grid md:grid-cols-3 gap-4">
-            <article class="reveal group bg-white border border-line overflow-hidden transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-navy/10">
-                <div class="aspect-[16/10] overflow-hidden bg-soft"><img src="images/news-indonesia.jpg" alt="FHI Indonesia 2025 부스" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"></div>
-                <div class="p-6">
-                    <p class="flex items-center gap-1.5 text-[12px] font-semibold tracking-[.14em] text-point"><i data-lucide="map-pin" class="w-3.5 h-3.5"></i>JAKARTA, INDONESIA</p>
-                    <h4 class="mt-2 text-xl font-bold">FHI Indonesia 2025</h4>
-                    <p class="mt-2 text-[15px] leading-relaxed text-navy/60" data-en="Laid the groundwork for entering Southeast Asian markets at Food &amp; Hotel Indonesia.">Food &amp; Hotel Indonesia 참가로 동남아시아 시장 진출의 교두보를 마련했습니다.</p>
+
+        <div class="mt-12 grid md:grid-cols-3 gap-4">
+            <article class="reveal group bg-white border border-slate-200 overflow-hidden transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-navy/10">
+                <div class="aspect-[16/10] overflow-hidden"><img src="images/news-indonesia.jpg" alt="FHI Indonesia 2025 부스" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"></div>
+                <div class="p-6 lg:p-7">
+                    <p class="text-[12px] font-bold tracking-[.14em] text-cyan">JAKARTA, INDONESIA</p>
+                    <h3 class="mt-2 text-xl font-bold">FHI Indonesia 2025</h3>
+                    <p class="mt-2 text-[15px] leading-relaxed text-slate-600" data-en="Participated in Food &amp; Hotel Indonesia, laying the groundwork for Southeast Asian expansion.">Food &amp; Hotel Indonesia 전시회에 참가해 동남아시아 시장 진출의 교두보를 마련했습니다.</p>
                 </div>
             </article>
-            <article class="reveal group bg-white border border-line overflow-hidden transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-navy/10">
-                <div class="aspect-[16/10] overflow-hidden bg-soft"><img src="images/news-china.jpg" alt="시안 실크로드 국제박람회 부스" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"></div>
-                <div class="p-6">
-                    <p class="flex items-center gap-1.5 text-[12px] font-semibold tracking-[.14em] text-point"><i data-lucide="map-pin" class="w-3.5 h-3.5"></i>XI'AN, CHINA</p>
-                    <h4 class="mt-2 text-xl font-bold" data-en="Silk Road International Expo">시안 실크로드 국제박람회</h4>
-                    <p class="mt-2 text-[15px] leading-relaxed text-navy/60" data-en="Confirmed potential for China's domestic market and Central Asia.">중국 내수 시장과 중앙아시아 진출 가능성을 확인했습니다.</p>
+            <article class="reveal group bg-white border border-slate-200 overflow-hidden transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-navy/10">
+                <div class="aspect-[16/10] overflow-hidden"><img src="images/news-china.jpg" alt="시안 실크로드 국제박람회 부스" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"></div>
+                <div class="p-6 lg:p-7">
+                    <p class="text-[12px] font-bold tracking-[.14em] text-cyan">XI'AN, CHINA</p>
+                    <h3 class="mt-2 text-xl font-bold" data-en="Silk Road International Expo">시안 실크로드 국제박람회</h3>
+                    <p class="mt-2 text-[15px] leading-relaxed text-slate-600" data-en="Explored entry into China's domestic market and Central Asia.">중국 내수 시장과 중앙아시아 진출 가능성을 타진했습니다.</p>
                 </div>
             </article>
-            <article class="reveal group bg-white border border-line overflow-hidden transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-navy/10">
-                <div class="aspect-[16/10] overflow-hidden bg-soft"><img src="images/news-japan.webp" alt="도쿄 인터내셔널 기프트쇼 전시장" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"></div>
-                <div class="p-6">
-                    <p class="flex items-center gap-1.5 text-[12px] font-semibold tracking-[.14em] text-point"><i data-lucide="map-pin" class="w-3.5 h-3.5"></i>TOKYO, JAPAN</p>
-                    <h4 class="mt-2 text-xl font-bold" data-en="Tokyo International Gift Show">도쿄 인터내셔널 기프트쇼</h4>
-                    <p class="mt-2 text-[15px] leading-relaxed text-navy/60" data-en="Pursued entry into local distribution channels and brand awareness.">현지 유통 채널 진입과 브랜드 인지도 확대를 추진했습니다.</p>
+            <article class="reveal group bg-white border border-slate-200 overflow-hidden transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-navy/10">
+                <div class="aspect-[16/10] overflow-hidden"><img src="images/news-japan.webp" alt="도쿄 인터내셔널 기프트쇼 전시장" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"></div>
+                <div class="p-6 lg:p-7">
+                    <p class="text-[12px] font-bold tracking-[.14em] text-cyan">TOKYO, JAPAN</p>
+                    <h3 class="mt-2 text-xl font-bold" data-en="Tokyo International Gift Show">도쿄 인터내셔널 기프트쇼</h3>
+                    <p class="mt-2 text-[15px] leading-relaxed text-slate-600" data-en="Pursued entry into local distribution channels and brand awareness.">현지 유통 채널 진입과 브랜드 인지도 확대를 추진했습니다.</p>
                 </div>
             </article>
         </div>
 
-        <!-- Partners & certifications -->
-        <div class="mt-16 border-y border-line py-8 reveal">
-            <p class="eyebrow text-navy/40 text-center" data-en="PARTNERS &amp; CERTIFICATIONS">PARTNERS &amp; CERTIFICATIONS</p>
-            <ul class="mt-7 grid grid-cols-3 sm:grid-cols-6 items-center gap-6 sm:gap-8">
-                <li class="flex justify-center"><img src="images/partner-daejeon.svg" alt="대전대학교" class="h-14 w-auto object-contain transition-transform hover:scale-105"></li>
-                <li class="flex justify-center"><img src="images/partner-udbio-t.png" alt="UD바이오" class="h-12 w-auto object-contain transition-transform hover:scale-105"></li>
-                <li class="flex justify-center"><img src="images/partner-rpglab-t.png" alt="RPG LAB" class="h-10 w-auto object-contain transition-transform hover:scale-105"></li>
-                <li class="flex justify-center"><img src="images/partner-sejong-t.png" alt="세종창조경제혁신센터" class="h-12 w-auto object-contain transition-transform hover:scale-105"></li>
-                <li class="flex justify-center"><img src="images/mark-haccp.avif" alt="HACCP" class="h-14 w-auto object-contain transition-transform hover:scale-105"></li>
-                <li class="flex justify-center"><img src="images/mark-gmp.png" alt="GMP" class="h-14 w-auto object-contain transition-transform hover:scale-105"></li>
+        <div class="mt-16 reveal">
+            <p class="eyebrow text-slate-500" data-en="TRUST NETWORK · OFFICIAL PARTNERS">TRUST NETWORK · OFFICIAL PARTNERS</p>
+            <ul class="mt-6 grid grid-cols-2 lg:grid-cols-4 gap-px bg-slate-200 border border-slate-200">
+                <li class="bg-white h-32 sm:h-36 flex flex-col items-center justify-center gap-2 px-4 transition-colors hover:bg-slate-50">
+                    <img src="images/partner-daejeon.svg" alt="대전대학교" class="h-14 w-auto object-contain">
+                    <span class="text-[12px] text-slate-500" data-en="Daejeon University">대전대학교</span>
+                </li>
+                <li class="bg-white h-32 sm:h-36 flex flex-col items-center justify-center gap-2 px-4 transition-colors hover:bg-slate-50">
+                    <img src="images/partner-sejong-t.png" alt="세종창조경제혁신센터" class="h-12 w-auto object-contain">
+                    <span class="text-[12px] text-slate-500 text-center" data-en="Sejong Center for Creative Economy &amp; Innovation">세종창조경제혁신센터</span>
+                </li>
+                <li class="bg-white h-32 sm:h-36 flex flex-col items-center justify-center gap-2 px-4 transition-colors hover:bg-slate-50">
+                    <img src="images/partner-rpglab-t.png" alt="RPG LAB" class="h-10 w-auto object-contain">
+                    <span class="text-[12px] text-slate-500">RPG LAB</span>
+                </li>
+                <li class="bg-white h-32 sm:h-36 flex flex-col items-center justify-center gap-2 px-4 transition-colors hover:bg-slate-50">
+                    <img src="images/partner-udbio-t.png" alt="주식회사 유디바이오" class="h-12 w-auto object-contain">
+                    <span class="text-[12px] text-slate-500" data-en="UD Bio Co., Ltd.">주식회사 유디바이오</span>
+                </li>
             </ul>
         </div>
     </div>
 </section>
 
-<!-- ===== Section 4: Roadmap ===== -->
-<section id="lineup" class="bg-soft py-20 lg:py-28">
-    <div class="wrap">
-        <div class="grid lg:grid-cols-12 gap-6 items-end reveal">
-            <div class="lg:col-span-7">
-                <p class="eyebrow text-point">ALCOHOL TOTAL SOLUTION ROADMAP</p>
-                <h2 class="mt-4 text-4xl sm:text-5xl font-black tracking-tight leading-tight" data-en="Beyond a hangover remedy —<br>an alcohol healthcare platform.">숙취해소제를 넘어,<br>알코올 전문 헬스케어 플랫폼으로</h2>
-            </div>
-            <p class="lg:col-span-5 text-[17px] leading-relaxed text-navy/65" data-en="A pipeline that covers the body and daily life before and after drinking.">음주 전후 우리 몸과 일상의 모든 단계를 케어하는 제품 파이프라인을 준비하고 있습니다.</p>
-        </div>
-
-        <div class="mt-12 relative">
-            <div class="hidden xl:block absolute left-0 right-0 top-[27px] h-px bg-navy/15" aria-hidden="true"></div>
-            <ol class="grid sm:grid-cols-2 xl:grid-cols-4 gap-4">
-                <li class="reveal relative">
-                    <div class="flex items-center gap-3 h-14">
-                        <span class="relative z-10 w-14 h-14 rounded-full bg-point text-white flex items-center justify-center font-black">01</span>
-                        <span class="text-[12px] font-bold tracking-[.14em] px-2.5 py-1 bg-point text-white" data-en="NOW">현재</span>
-                    </div>
-                    <article class="mt-5 bg-white border-t-2 border-point shadow-sm hover:shadow-xl hover:shadow-navy/10 transition-all hover:-translate-y-1">
-                        <div class="aspect-[4/3] bg-gradient-to-br from-white to-navy-100 flex items-center justify-center"><img src="images/product-cutout.png" alt="확깨유" class="h-[80%] w-auto drop-shadow-xl"></div>
-                        <div class="p-6">
-                            <p class="text-[12px] font-semibold tracking-[.14em] text-navy/40">STEP 1 · HANGOVER</p>
-                            <h3 class="mt-2 text-xl font-bold" data-en="Hwakkaeyu">확깨유</h3>
-                            <p class="mt-1 text-[15px] text-navy/60" data-en="Herbal raw-pressed pill · Fast hangover relief">한방 원물 압착 환제 · 즉각 숙취 완화</p>
-                            <a href="https://smartstore.naver.com/alcofixkorea/products/12747856417" target="_blank" rel="noopener" class="mt-4 inline-flex items-center gap-1.5 text-[14px] font-semibold text-point hover:gap-2.5 transition-all"><span data-en="On sale now">판매 중 · 구매하기</span><i data-lucide="arrow-right" class="w-4 h-4"></i></a>
-                        </div>
-                    </article>
-                </li>
-                <li class="reveal relative">
-                    <div class="flex items-center gap-3 h-14">
-                        <span class="relative z-10 w-14 h-14 rounded-full bg-navy text-white flex items-center justify-center font-black">02</span>
-                        <span class="text-[12px] font-bold tracking-[.14em] px-2.5 py-1 bg-navy text-white">COMING SOON · 2027</span>
-                    </div>
-                    <article class="mt-5 bg-white border-t-2 border-navy shadow-sm hover:shadow-xl hover:shadow-navy/10 transition-all hover:-translate-y-1">
-                        <div class="aspect-[4/3] overflow-hidden"><img src="images/soon-liquid.jpg" alt="" class="w-full h-full object-cover"></div>
-                        <div class="p-6">
-                            <p class="text-[12px] font-semibold tracking-[.14em] text-navy/40">STEP 2 · FAST ABSORPTION</p>
-                            <h3 class="mt-2 text-xl font-bold" data-en="High-concentration ampoule">고농축 앰플형 액상 숙취해소제</h3>
-                            <p class="mt-1 text-[15px] text-navy/60" data-en="Liquid formulation for faster absorption">빠른 흡수를 목표로 한 액상 제형</p>
-                        </div>
-                    </article>
-                </li>
-                <li class="reveal relative">
-                    <div class="flex items-center gap-3 h-14">
-                        <span class="relative z-10 w-14 h-14 rounded-full bg-white border-2 border-navy text-navy flex items-center justify-center font-black">03</span>
-                        <span class="text-[12px] font-bold tracking-[.14em] px-2.5 py-1 border border-navy text-navy">R&amp;D · 2028</span>
-                    </div>
-                    <article class="mt-5 bg-white border-t-2 border-navy/40 shadow-sm hover:shadow-xl hover:shadow-navy/10 transition-all hover:-translate-y-1">
-                        <div class="aspect-[4/3] overflow-hidden"><img src="images/soon-probiotics.jpg" alt="" class="w-full h-full object-cover"></div>
-                        <div class="p-6">
-                            <p class="text-[12px] font-semibold tracking-[.14em] text-navy/40">STEP 3 · GUT</p>
-                            <h3 class="mt-2 text-xl font-bold" data-en="Post-drinking probiotics">알코올 후케어 복합 유산균</h3>
-                            <p class="mt-1 text-[15px] text-navy/60" data-en="Restoring the gut microbiome after drinking">음주로 흐트러진 장내 마이크로바이옴 복원</p>
-                        </div>
-                    </article>
-                </li>
-                <li class="reveal relative">
-                    <div class="flex items-center gap-3 h-14">
-                        <span class="relative z-10 w-14 h-14 rounded-full bg-white border-2 border-dashed border-navy/50 text-navy/70 flex items-center justify-center font-black">04</span>
-                        <span class="text-[12px] font-bold tracking-[.14em] px-2.5 py-1 border border-dashed border-navy/50 text-navy/70">FUTURE · 2030</span>
-                    </div>
-                    <article class="mt-5 bg-white border-t-2 border-dashed border-navy/40 shadow-sm hover:shadow-xl hover:shadow-navy/10 transition-all hover:-translate-y-1">
-                        <div class="aspect-[4/3] overflow-hidden"><img src="images/soon-mask.jpg" alt="" class="w-full h-full object-cover"></div>
-                        <div class="p-6">
-                            <p class="text-[12px] font-semibold tracking-[.14em] text-navy/40">STEP 4 · SKIN</p>
-                            <h3 class="mt-2 text-xl font-bold" data-en="Recovery mask pack">음주 진정 리커버리 마스크팩</h3>
-                            <p class="mt-1 text-[15px] text-navy/60" data-en="Care for heat and skin trouble after drinking">음주 후 피부 열감과 트러블 케어</p>
-                        </div>
-                    </article>
-                </li>
-            </ol>
-            <p class="mt-6 text-[13px] text-navy/45" data-en="※ Launch schedules may change depending on development.">※ 출시 일정은 개발 상황에 따라 변경될 수 있습니다.</p>
-        </div>
-    </div>
-</section>
-
-<!-- ===== Section 5: Dual conversion ===== -->
+<!-- ===== B2B / Investor Partnership ===== -->
 <section id="contact" class="bg-white py-20 lg:py-28">
     <div class="wrap">
         <div class="reveal">
-            <p class="eyebrow text-point">GET STARTED</p>
-            <h2 class="mt-4 text-4xl sm:text-5xl font-black tracking-tight leading-tight" data-en="Choose your track.">목적에 맞게 시작하세요</h2>
+            <p class="eyebrow text-cyan">B2B · INVESTOR PARTNERSHIP</p>
+            <h2 class="mt-4 text-4xl sm:text-5xl font-black tracking-tight leading-tight" data-en="Grow with ALCOFIX.">알코픽스와 함께 성장할<br>파트너를 찾습니다</h2>
         </div>
 
         <div class="mt-12 grid lg:grid-cols-12 gap-4">
-            <!-- B2C -->
-            <div class="lg:col-span-5 relative overflow-hidden bg-navy text-white p-8 sm:p-10 lg:p-12 flex flex-col reveal">
-                <div class="absolute inset-0 grid-bg" aria-hidden="true"></div>
-                <img src="images/hero-morning.jpg" alt="" class="absolute inset-0 w-full h-full object-cover opacity-20" aria-hidden="true">
-                <div class="relative">
-                    <span class="inline-flex items-center gap-2 text-[12px] font-bold tracking-[.16em] px-3 py-1.5 bg-point">B2C · FOR CUSTOMERS</span>
-                    <h3 class="mt-6 text-3xl sm:text-4xl font-black leading-tight tracking-tight" data-en="Get ready for<br>a fresher tomorrow.">지금 바로<br>상쾌한 다음 날을<br>준비하세요</h3>
-                    <p class="mt-4 text-[16px] text-white/70" data-en="Buy Hwakkaeyu at our official Naver Smart Store.">확깨유는 네이버 스마트스토어 공식 판매처에서 구매할 수 있습니다.</p>
-                </div>
-                <div class="relative mt-auto pt-10">
-                    <a href="https://smartstore.naver.com/alcofixkorea/products/12747856417" target="_blank" rel="noopener"
-                       class="group flex items-center justify-between bg-white text-navy px-6 py-5 transition-all hover:bg-point hover:text-white">
-                        <span class="flex items-center gap-3">
-                            <i data-lucide="store" class="w-6 h-6"></i>
-                            <span>
-                                <span class="block text-[12px] font-semibold tracking-[.14em] opacity-60">OFFICIAL STORE</span>
-                                <span class="block text-lg font-bold" data-en="Naver Smart Store">네이버 스마트스토어 바로가기</span>
-                            </span>
-                        </span>
-                        <i data-lucide="arrow-up-right" class="w-6 h-6 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"></i>
-                    </a>
-                </div>
-            </div>
-
-            <!-- B2B form -->
-            <div class="lg:col-span-7 border border-line p-8 sm:p-10 lg:p-12 reveal">
-                <span class="inline-flex items-center gap-2 text-[12px] font-bold tracking-[.16em] px-3 py-1.5 bg-navy text-white">B2B · PARTNERSHIP</span>
-                <h3 class="mt-6 text-3xl font-black tracking-tight" data-en="Global distributors &amp; buyers">글로벌 유통사 및 바이어 제휴 문의</h3>
-                <p class="mt-2 text-[15px] text-navy/60" data-en="Export, distribution, OEM/ODM and joint research — we reply within 2 business days.">수출·유통 입점·OEM/ODM·공동 연구 등 제휴 문의를 남겨주세요.</p>
+            <!-- Form -->
+            <div class="lg:col-span-8 border border-slate-200 p-7 sm:p-10 reveal">
+                <h3 class="text-2xl font-black tracking-tight" data-en="Buyer &amp; partner inquiry">바이어 · 파트너사 전용 문의</h3>
+                <p class="mt-2 text-[15px] text-slate-600" data-en="Tell us about your company and the partnership you have in mind.">회사 소개와 검토 중인 제휴 내용을 남겨주시면 담당자가 연락드립니다.</p>
 
                 <form id="b2bForm" class="mt-8 grid sm:grid-cols-2 gap-4" novalidate>
                     <label class="block">
-                        <span class="text-[13px] font-semibold text-navy/70" data-en="Name">담당자명</span>
-                        <input class="field mt-1.5" name="name" required autocomplete="name" data-ph-en="Your name" placeholder="홍길동">
+                        <span class="text-[13px] font-semibold text-slate-600" data-en="Company">회사명</span>
+                        <input class="field mt-1.5" name="company" required autocomplete="organization">
                     </label>
                     <label class="block">
-                        <span class="text-[13px] font-semibold text-navy/70" data-en="Company / Country">회사명 / 국가</span>
-                        <input class="field mt-1.5" name="company" required autocomplete="organization" data-ph-en="Company, Country" placeholder="회사명, 국가">
+                        <span class="text-[13px] font-semibold text-slate-600" data-en="Country">국가</span>
+                        <input class="field mt-1.5" name="country" required autocomplete="country-name">
                     </label>
                     <label class="block">
-                        <span class="text-[13px] font-semibold text-navy/70" data-en="Email">이메일</span>
+                        <span class="text-[13px] font-semibold text-slate-600" data-en="Name / Title">담당자 성함 / 직함</span>
+                        <input class="field mt-1.5" name="name" required autocomplete="name">
+                    </label>
+                    <label class="block">
+                        <span class="text-[13px] font-semibold text-slate-600" data-en="Email">이메일</span>
                         <input class="field mt-1.5" name="email" type="email" required autocomplete="email" placeholder="name@company.com">
                     </label>
-                    <label class="block">
-                        <span class="text-[13px] font-semibold text-navy/70" data-en="Partnership type">제휴 유형</span>
+                    <label class="block sm:col-span-2">
+                        <span class="text-[13px] font-semibold text-slate-600" data-en="Partnership type">제휴 유형</span>
                         <select class="field mt-1.5" name="type">
-                            <option data-en="Export · Overseas distribution">수출 · 해외 유통</option>
-                            <option data-en="Domestic distribution · Retail">국내 유통 · 입점</option>
-                            <option data-en="OEM · ODM">OEM · ODM</option>
-                            <option data-en="Joint research">공동 연구</option>
+                            <option data-en="Export &amp; overseas buyer">해외 수출 및 바이어</option>
+                            <option data-en="Domestic distribution">국내 유통</option>
+                            <option data-en="Joint R&amp;D">공동 R&amp;D</option>
+                            <option data-en="Raw material supply">원료 공급</option>
                             <option data-en="Other">기타</option>
                         </select>
                     </label>
                     <label class="block sm:col-span-2">
-                        <span class="text-[13px] font-semibold text-navy/70" data-en="Message">문의 내용</span>
-                        <textarea class="field mt-1.5 min-h-[140px] resize-y" name="message" required data-ph-en="Tell us about your business and interest." placeholder="회사 소개와 관심 있는 제휴 내용을 적어주세요."></textarea>
+                        <span class="text-[13px] font-semibold text-slate-600" data-en="Message">문의 내용</span>
+                        <textarea class="field mt-1.5 min-h-[150px] resize-y" name="message" required></textarea>
                     </label>
-                    <label class="sm:col-span-2 flex items-start gap-2.5 text-[14px] text-navy/60">
-                        <input type="checkbox" name="agree" required class="mt-1 w-4 h-4 accent-[#0A1F44]">
+                    <label class="sm:col-span-2 flex items-start gap-2.5 text-[14px] text-slate-600">
+                        <input type="checkbox" name="agree" required class="mt-1 w-4 h-4 accent-[#0284C7]">
                         <span data-en="I agree to the collection and use of personal information for replying to this inquiry.">문의 답변을 위한 개인정보 수집·이용에 동의합니다.</span>
                     </label>
                     <div class="sm:col-span-2 flex flex-col sm:flex-row sm:items-center gap-4">
@@ -560,51 +579,80 @@ tailwind.config = {
                     </div>
                 </form>
             </div>
+
+            <!-- Side: company profile + contact -->
+            <div class="lg:col-span-4 flex flex-col gap-4">
+                <div class="relative overflow-hidden bg-navy text-white p-7 sm:p-9 reveal">
+                    <div class="absolute inset-0 grid-dark" aria-hidden="true"></div>
+                    <div class="relative">
+                        <i data-lucide="file-text" class="w-9 h-9 text-cyan-light"></i>
+                        <p class="mt-5 eyebrow text-white/50">COMPANY PROFILE</p>
+                        <h3 class="mt-2 text-2xl font-black leading-snug" data-en="English company profile (PDF)">영문 회사소개서 (PDF)</h3>
+                        <p class="mt-3 text-[15px] leading-relaxed text-white/65" data-en="Company overview, R&amp;D capability, pipeline and global track record in one document.">기업 개요, R&amp;D 역량, 파이프라인, 글로벌 실적을 한 권에 담았습니다.</p>
+                        <a id="profileBtn" href="mailto:alcofixkorea@gmail.com?subject=%5BALCOFIX%5D%20Company%20profile%20request"
+                           class="mt-7 group flex items-center justify-between bg-white text-navy px-5 py-4 font-semibold transition-colors hover:bg-cyan hover:text-white">
+                            <span class="flex items-center gap-2"><i data-lucide="download" class="w-5 h-5"></i><span data-en="Request the PDF">회사소개서 요청하기</span></span>
+                            <i data-lucide="arrow-right" class="w-5 h-5 transition-transform group-hover:translate-x-1"></i>
+                        </a>
+                        <p class="mt-3 text-[12px] text-white/45" data-en="The PDF is being prepared; we will send it by email for now.">PDF 파일 준비 전까지는 이메일로 보내드립니다.</p>
+                    </div>
+                </div>
+                <div class="border border-slate-200 p-7 sm:p-9 reveal">
+                    <p class="eyebrow text-slate-500">DIRECT CONTACT</p>
+                    <ul class="mt-5 space-y-4 text-[15px]">
+                        <li class="flex gap-3"><i data-lucide="mail" class="w-5 h-5 text-cyan shrink-0 mt-0.5"></i><a href="mailto:alcofixkorea@gmail.com" class="hover:text-cyan transition-colors">alcofixkorea@gmail.com</a></li>
+                        <li class="flex gap-3"><i data-lucide="phone" class="w-5 h-5 text-cyan shrink-0 mt-0.5"></i><span>010-2023-9507</span></li>
+                        <li class="flex gap-3"><i data-lucide="map-pin" class="w-5 h-5 text-cyan shrink-0 mt-0.5"></i><span data-en="203, 2296 Sejong-ro, Jochiwon-eup, Sejong (Sejong Startup Kium Center)">세종특별자치시 조치원읍 세종로 2296, 203호 (세종창업키움센터)</span></li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 </main>
 
 <!-- ===== Footer ===== -->
-<footer class="bg-navy-900 text-white/60">
+<footer class="bg-navy-950 text-white/60">
     <div class="wrap py-14 grid lg:grid-cols-12 gap-10">
-        <div class="lg:col-span-5">
+        <div class="lg:col-span-4">
             <div class="flex items-center gap-3">
-                <img src="images/logo-cube.png" alt="" class="h-10 w-auto">
+                <img src="images/logo-cube.png" alt="" class="h-11 w-auto">
                 <div>
                     <p class="text-white text-xl font-black tracking-tight">ALCOFIX</p>
-                    <p class="text-[12px] tracking-[.16em]">ALCOHOL TOTAL SOLUTION</p>
+                    <p class="text-[11px] tracking-[.18em]">ALCOHOL TOTAL SOLUTION</p>
                 </div>
             </div>
-            <p class="mt-6 text-[14px] leading-relaxed max-w-md" data-en="Leading a healthy drinking culture with science-led alcohol total solutions.">건강한 음주문화를 선도하는 알코올 토탈 솔루션 기업</p>
+            <p class="mt-6 text-[14px] italic">We fix what alcohol leaves behind.</p>
+            <a href="https://www.instagram.com/alcofix__/" target="_blank" rel="noopener" class="mt-6 inline-flex items-center gap-2 text-white hover:text-cyan-light transition-colors text-[14px]">
+                <i data-lucide="instagram" class="w-5 h-5"></i>@alcofix__
+            </a>
         </div>
-        <div class="lg:col-span-4 text-[14px] leading-7">
-            <p class="text-white font-semibold mb-2" data-en="Company info">사업자 정보</p>
-            <p data-en="ALCOFIX · CEO Sungjin Kim">상호 알코픽스 · 대표 김성진</p>
-            <p data-en="Business registration no. 000-00-00000 (to be filled)">사업자등록번호 000-00-00000 (입력 필요)</p>
-            <p data-en="203, 2296 Sejong-ro, Jochiwon-eup, Sejong, Korea">세종특별자치시 조치원읍 세종로 2296, 203호</p>
+        <div class="lg:col-span-5 text-[14px] leading-7">
+            <p class="text-white font-semibold mb-2" data-en="Company information">사업자 정보</p>
+            <p data-en="ALCOFIX Co., Ltd. · CEO Sungjin Kim">주식회사 알코픽스 · 대표이사 김성진</p>
+            <p data-en="Business registration no. 884-88-03494">사업자등록번호 884-88-03494</p>
+            <p data-en="203, 2296 Sejong-ro, Jochiwon-eup, Sejong, Republic of Korea">세종특별자치시 조치원읍 세종로 2296, 203호 (세종창업키움센터)</p>
             <p>alcofixkorea@gmail.com · 010-2023-9507</p>
         </div>
-        <div class="lg:col-span-3 flex flex-col gap-4">
+        <div class="lg:col-span-3 flex flex-col gap-5">
             <label class="block">
                 <span class="text-white font-semibold text-[14px]">FAMILY SITE</span>
                 <span class="mt-2 flex">
                     <select id="familySite" class="flex-1 min-w-0 bg-transparent border border-white/25 text-white text-[14px] px-3 py-2.5 outline-none focus:border-white">
                         <option value="" class="text-navy" data-en="Select">선택하세요</option>
                         <option value="https://smartstore.naver.com/alcofixkorea" class="text-navy" data-en="Hwakkaeyu Smart Store">확깨유 스마트스토어</option>
-                        <option value="https://www.instagram.com/alcofix__/" class="text-navy">Instagram</option>
                     </select>
-                    <button type="button" id="familyGo" class="px-4 bg-white text-navy text-[14px] font-semibold hover:bg-point hover:text-white transition-colors" data-en="Go">이동</button>
+                    <button type="button" id="familyGo" class="px-4 bg-white text-navy text-[14px] font-semibold hover:bg-cyan hover:text-white transition-colors" data-en="Go">이동</button>
                 </span>
             </label>
             <div class="flex gap-4 text-[14px]">
-                <a href="https://alcofix.co.kr/privacy.html" target="_blank" rel="noopener" class="text-white hover:text-point transition-colors" data-en="Privacy Policy">개인정보처리방침</a>
+                <a href="https://alcofix.co.kr/privacy.html" target="_blank" rel="noopener" class="text-white hover:text-cyan-light transition-colors" data-en="Privacy Policy">개인정보처리방침</a>
                 <a href="https://alcofix.co.kr/terms.html" target="_blank" rel="noopener" class="hover:text-white transition-colors" data-en="Terms of Use">이용약관</a>
             </div>
         </div>
     </div>
     <div class="border-t border-white/10">
-        <div class="wrap py-5 text-[12px] tracking-[.08em]">© 2025 ALCOFIX. ALL RIGHTS RESERVED.</div>
+        <div class="wrap py-5 text-[12px] tracking-[.08em]">© 2025 ALCOFIX CO., LTD. ALL RIGHTS RESERVED.</div>
     </div>
 </footer>
 
@@ -643,10 +691,6 @@ tailwind.config = {
             if (el.dataset.ko === undefined) el.dataset.ko = el.innerHTML;
             el.innerHTML = next === 'en' ? el.dataset.en : el.dataset.ko;
         });
-        document.querySelectorAll('[data-ph-en]').forEach(function (el) {
-            if (el.dataset.phKo === undefined) el.dataset.phKo = el.placeholder;
-            el.placeholder = next === 'en' ? el.dataset.phEn : el.dataset.phKo;
-        });
         document.querySelectorAll('.lang-btn').forEach(function (b) {
             b.setAttribute('aria-pressed', b.dataset.lang === next ? 'true' : 'false');
         });
@@ -677,8 +721,7 @@ tailwind.config = {
     }
 
     /* Count-up numbers */
-    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!reduce && 'IntersectionObserver' in window) {
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
         var co = new IntersectionObserver(function (entries) {
             entries.forEach(function (entry) {
                 if (!entry.isIntersecting) return;
@@ -702,17 +745,18 @@ tailwind.config = {
         e.preventDefault();
         var ko = lang === 'ko';
         if (!form.checkValidity()) {
-            msg.className = 'text-[14px] text-point';
+            msg.className = 'text-[14px] text-coral';
             msg.textContent = ko ? '필수 항목과 개인정보 동의를 확인해 주세요.' : 'Please fill in the required fields and agree to the privacy terms.';
             form.reportValidity();
             return;
         }
         var fd = new FormData(form);
-        var subject = '[ALCOFIX B2B] ' + fd.get('type') + ' - ' + fd.get('company');
-        var body = 'Name: ' + fd.get('name') + '\nCompany/Country: ' + fd.get('company') +
-                   '\nEmail: ' + fd.get('email') + '\nType: ' + fd.get('type') + '\n\n' + fd.get('message');
+        var subject = '[ALCOFIX B2B] ' + fd.get('type') + ' - ' + fd.get('company') + ' (' + fd.get('country') + ')';
+        var body = 'Company: ' + fd.get('company') + '\nCountry: ' + fd.get('country') +
+                   '\nName/Title: ' + fd.get('name') + '\nEmail: ' + fd.get('email') +
+                   '\nType: ' + fd.get('type') + '\n\n' + fd.get('message');
         msg.className = 'text-[14px] text-navy';
-        msg.textContent = ko ? '메일 앱에서 문의 내용을 확인한 뒤 보내주세요.' : 'Please review and send the inquiry from your mail app.';
+        msg.textContent = ko ? '메일 앱에서 내용을 확인한 뒤 보내주세요.' : 'Please review and send the inquiry from your mail app.';
         window.location.href = 'mailto:alcofixkorea@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
     });
 
