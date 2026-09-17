@@ -475,7 +475,7 @@
 
 })();
 
-/* ===== TEST · 확깨유를 나타내는 숫자: click a number to open its story ===== */
+/* ===== 확깨유를 나타내는 숫자: click a number to open its story ===== */
 (function(){
     'use strict';
     document.querySelectorAll('.kf').forEach(function(kf) {
